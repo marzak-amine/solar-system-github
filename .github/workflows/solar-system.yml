@@ -66,10 +66,12 @@ jobs:
         - name: Run coverage
           run: npm run coverage
           continue-on-error: true
+          id: converage-test
 
 
         - name: Archive coverage report
           uses: actions/upload-artifact@v5
+          if:  steps.converage-test.outcome == 'failure' || steps.converage-test.outcome == 'success'
           with:
             name: Code-Coverage-Result
             path: coverage
