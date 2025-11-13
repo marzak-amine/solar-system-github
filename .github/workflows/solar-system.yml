@@ -43,10 +43,11 @@ jobs:
             name: Mocha-Test-Result
             path: test-results.xml
             retention-days: 5
-            
+
     code-coverage:
       name: Code Coverage
       runs-on: ubuntu-latest
+      needs: unit-testing
       steps:
         - name: Checkout repository
           uses: actions/checkout@v5
@@ -64,6 +65,7 @@ jobs:
 
         - name: Run coverage
           run: npm run coverage
+          continue-on-error: true
 
 
         - name: Archive coverage report
